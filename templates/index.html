@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 <div class="w3-top">
   <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
     <a href="#home" class="w3-bar-item w3-button">Zinger</a>
-    <img href="..\img\img\Logo.png" >
+    <img href="../img/img/Logo.png" >
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <a href="#about" class="w3-bar-item w3-button">About</a>
@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6 {
         <button class="w3-bar-item w3-button">Register/Login</button>
         <div class="w3-dropdown-content w3-bar-block w3-border">
           <a href="#" class="w3-bar-item w3-button">User</a>
-          <a href="../templates/login-restaurant.html" class="w3-bar-item w3-button">Restaurant</a>
+          <a href="templates/login-restaurant.html" class="w3-bar-item w3-button">Restaurant</a>
           <a href="../templates/login-delivery.html" class="w3-bar-item w3-button">Delivery</a>
         </div>
       </div>
@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="..\img\img\food.jpg" alt="Hamburger Catering" width="1600" height="800">
+  <img class="w3-image" src="{{url_for('static',filename='style/food.jpg')}}" alt="Hamburger Catering" width="1600" height="800">
   <div class="w3-display-bottomleft w3-padding-large">
     <h1 class="title" >Zinger</h1>
     <h2 class = "subtitle">Food Delivery: Anywhere, Anytime</h2>
