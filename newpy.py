@@ -143,3 +143,66 @@ def loginRestaurants():
         else:
             return redirect(url_for('loginRestaurants'))
         #give proper url
+
+@app.route()
+def loginDeliverBoy():
+
+   
+    # Check if "username" and "password" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+    
+ 
+        # Check if account exists using pSQL
+        cursor.execute('SELECT loginDelivery(%s, %d)',(username,password))
+
+    
+        accountUser = cursor.fetchone()
+        if accountUser:
+            return redirect(url_for('restaurants'))
+        else:
+            return redirect(url_for('loginRestaurants'))
+@app.route()
+def loginCustomers():
+
+   
+    # Check if "username" and "password" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+    
+ 
+        # Check if account exists using pSQL
+        cursor.execute('SELECT loginCustomer(%s, %d)',(username,password))
+
+    
+        accountUser = cursor.fetchone()
+        if accountUser:
+            return redirect(url_for('restaurants'))
+        else:
+            return redirect(url_for('loginRestaurants'))
+
+@app.route()
+def RegisterCustomers():
+
+   
+    
+  if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+        # Create variables for easy access
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        phone = request.form['phone']
+        who = request.form['Type']
+    
+ 
+        # Check if account exists using pSQL
+        cursor.execute('SELECT loginCustomer(%s, %d)',(username,password))
+
+    
+        accountUser = cursor.fetchone()
+        if accountUser:
+            return redirect(url_for('restaurants'))
+        else:
+            return redirect(url_for('loginRestaurants'))
