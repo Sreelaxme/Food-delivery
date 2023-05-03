@@ -13,6 +13,10 @@ DB_USER = "proj_admin"
 DB_PASS = "password"
  
 conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+@app.route('/')
+def home():
+  
+    return render_template('index.html')
 @app.route('/', methods=['GET','POST'])
 def get_restaurants():
     #conn = sqlite3.connect('restaurant.db')
