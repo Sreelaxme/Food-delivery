@@ -33,6 +33,7 @@
           <form action="{{ url_for('login') }}" method = "post">
               <h1>Create Account</h1>
               <input type="text" placeholder="Name" id="name" required/>
+              <input type="email" placeholder="Email" id = "email" required/>
               <input type="phno" placeholder="phno" id = "phno" required/>
               <input type="text" placeholder="Building Name" id = "Bname" required/>
               <input type="text" placeholder="City" id = "city" required/>
@@ -44,7 +45,7 @@
           <form action="#">
               <h1>Sign in</h1>
               <input type="name" placeholder="name" />
-              <input type="password" placeholder="delivery_id" />
+              <input type="password" placeholder="customer_id" />
               <button>Sign In</button>
           </form>
       </div>
