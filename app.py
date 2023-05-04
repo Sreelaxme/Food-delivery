@@ -217,5 +217,25 @@ def top_5dishes(name,veg = None, cuisine = None ):
 #             return redirect(url_for('loginRestaurants'))
 
 
+# Define a Flask route that inserts a new row into the Customer_cartlist table
+@app.route('/add_to_cartlist')
+def add_to_cartlist():
+    # Retrieve the ID of the currently logged in user from the Flask session
+    customer_id = session.get('customer_id')
+
+    # Retrieve the item ID and quantity from the request
+    item_id = request.args.get('item_id')
+    quantity = request.args.get('quantity')
+
+    # Insert a new row into the Customer_cartlist table with the retrieved customer ID
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO Customer_cartlist ( item_id, customer_id, number) VALUES ( %s, %s, %s)", (item_id, customer_id, quantity))
+    conn.commit()
+
+    return "Item added to cartlist!"
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
