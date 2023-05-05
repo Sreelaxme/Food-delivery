@@ -158,10 +158,41 @@ def restaurant_items():
     user_name=session['name']+session['password']
     conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    c = cursor.execute(f'SELECT d.dish_name,i.item_cost,i.available from restaurant_dish as d join restaurant_items on dish_id where r_id = {id}')
+    c = cursor.execute(f'SELECT d.dish_name,i.item_cost,i.available from restaurant_dish as d join restaurant_items as i on d.dish_id=i.dish_id where i.r_id = {id}')
     items = cursor.fetchall()
     return render_template('restmenu.html',results = items)
-# 
+
+@app.route('/restaurants',methods = ['POST'])
+def all_restaurants():
+    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    c = conn.cursor()
+    query = "SELECT r_id,r_name FROM Restaurants ORDER BY rating "
+    c.execute(query)
+    restaurants = c.fetchall()
+    session['top_restaurants'] = restaurants
+    session['loggedInCustomers'] = False
+    session['veg'] =False
+    # conn.close()
+    return render_template('restaurant_list.html', results=restaurants,loggedIn = True)
+
+@app.route('/dishes', methods=['POST'])
+def all_dishes():
+    # user_name=session['name']+session['password']
+    restaurant_id = request.form['restaurant_id']
+    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    c = conn.cursor()
+    query = f"SELECT d.dish_name,d.cousine,d.dish_image_link,d.vegetarian FROM Restaurant_dish as d join restaurant_items as i on d.dish_id=i.dish_id where i.r_id = {restaurant_id}"
+    if request.form.get('cuisine'):
+        query +=f"and d.cousine = {cuisine}"
+    else:
+        pass
+    if request.form.get('veg'):
+        query+=f"and d.vegetarian = 't'"
+    else:
+        pass
+    c.execute(query)
+    dishes = c.fetchall()
+    return render_template('restaurant_ordering.html',results = dishes)
 # def home():
 
   
