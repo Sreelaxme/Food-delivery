@@ -68,12 +68,42 @@ def login():
             return render_template('login-restaurant.html')
         elif user_type == '2':
             return render_template('login-delivery.html')
-@app.route('/')
+@app.route('/',methods = ['POST'])
 def fillcomplaint():
+    name = request.form['name']
+    email = request.form['email-id']
+    message = request.form['message']
+    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cursor.execute('INSERT INTO complaints (name,email,message) values(%s,%s,%s)',(name,email,message))
+        conn.commit()
+    except:
+        flash('DIDnt enter')
+    if session['loggedInCustomers']==True:
+        return render_template('index.html',loggedIn=session['loggedInCustomers'],results= session['top_restaurants'],name = session['name'])
+    else :
+        return render_template('index.html',loggedIn=session['loggedInCustomers'],results= session['top_restaurants'])
     
     
-    
-
+@app.route('/register',methods=['POST'])
+def register():
+    user_type = session['user_type']
+    name = request.form['name']
+    building_name = request.form['Bname']
+    city = request.form['city']
+    pin = request.form['pin']
+    ph = request.form['phno']
+    if user_type == '0':
+        email = request.form['email']
+        flash('Ur password is 1')
+        return render_template('login-customer.html')
+    elif user_type == '1':
+        gstno = request.form['gst_no']
+        image_url = request.form['img_link']
+        return render_template('login-restaurant.html')
+    elif user_type == '2':
+        return render_template('login-delivery.html')
 
 
 # @app.route('/')
