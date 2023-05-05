@@ -21,7 +21,7 @@ def top_5_restaurants():
     c.execute(query)
     restaurants = c.fetchall()
     # conn.close()
-    return render_template('index.html', restaurants=restaurants)
+    return render_template('index.html', results=restaurants)
 
 # @app.route('/')
 # def home():
