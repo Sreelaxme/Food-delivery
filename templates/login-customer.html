@@ -30,14 +30,14 @@
   
   <div class="container" id="container">
       <div class="form-container sign-up-container">
-          <form action="{{ url_for('login') }}" method = "post">
+          <form action="{{ url_for('register') }}" method = "post">
               <h1>Create Account</h1>
-              <input type="text" placeholder="Name" id="name" required/>
-              <input type="email" placeholder="Email" id = "email" required/>
-              <input type="phno" placeholder="phno" id = "phno" required/>
-              <input type="text" placeholder="Building Name" id = "Bname" required/>
-              <input type="text" placeholder="City" id = "city" required/>
-              <input type="int" placeholder="Pin Code" id = "pin" required/>
+              <input type="text" placeholder="Name" name="name" required/>
+              <input type="email" placeholder="Email" name = "email-id" required/>
+              <input type="phno" placeholder="phno" name = "phno" required/>
+              <input type="text" placeholder="Building Name" name = "Bname" required/>
+              <input type="text" placeholder="City" name = "city" required/>
+              <input type="int" placeholder="Pin Code" name = "pin" required/>
               <button>Sign Up</button>
           </form>
       </div>
