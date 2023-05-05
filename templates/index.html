@@ -25,13 +25,18 @@ h1, h2, h3, h4, h5, h6 {
       <a href="#about" class="w3-bar-item w3-button">About</a>
       <a href="#menu" class="w3-bar-item w3-button">Top Restaurants</a>
       <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+      <form method="post" action="{{ url_for('all_restaurant') }}">
+          <button class="w3-bar-item w3-button" type="submit">Order Now</a>
+      </form>
       <div class="w3-dropdown-hover">
         <button class="w3-bar-item w3-button">Register/Login</button>
-        <div class="w3-dropdown-content w3-bar-block w3-border">
-          <a href="#" class="w3-bar-item w3-button">User</a>
-          <a href="templates/login-restaurant.html" class="w3-bar-item w3-button">Restaurant</a>
-          <a href="../templates/login-delivery.html" class="w3-bar-item w3-button">Delivery</a>
-        </div>
+        <form method="post" action="{{ url_for('login_check') }}">
+          <div class="w3-dropdown-content w3-bar-block w3-border">
+            <button type="submit" name="user_type" value="0" class="w3-bar-item w3-button">User</a>
+            <button type="submit" name="user_type" value="1" class="w3-bar-item w3-button">Restaurant</a>
+            <button type="submit" name="user_type" value="2" class="w3-bar-item w3-button">Delivery</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -71,6 +76,8 @@ h1, h2, h3, h4, h5, h6 {
       <h1 class="w3-center">Top 5 Restaurants</h1><br>
       {% for result in results%}
         <h4>{{result[1]}}</h4>
+        {%if(loggedIn==True)%}
+          <p><button class="w3-button w3-light-grey w3-section" type="submit">ORDER FROM HERE</button></p>
         {% endfor %}
      
     </div>
