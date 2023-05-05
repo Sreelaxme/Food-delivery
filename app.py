@@ -51,25 +51,25 @@ def login():
     password = request.form['password']
     session['password'] = password
     user_type = session['user_type']
-    try:
-        conn=psycopg2.connect(dbname=DB_NAME, user=name+password, password=password, host=DB_HOST)
-        if user_type == '0':
-            session['loggedInCustomers'] = True
-            return render_template('index.html',results = session['top_restaurants'] ,loggedIn=True,name=name)
-        if user_type =='1':
-            return render_template('restindex.html',loggedIn=True,name=name)
-        if user_type =='2':
-            return render_template('deliveryindex.html',loggedIn=True,name=name)
-        
+    # try:
+    conn=psycopg2.connect(dbname=DB_NAME, user=name+password, password=password, host=DB_HOST)
+    if user_type == '0':
+        session['loggedInCustomers'] = True
+        return render_template('index.html',results = session['top_restaurants'] ,loggedIn=True,name=name)
+    if user_type =='1':
+        return render_template('restindex.html',loggedIn=True,name=name)
+    if user_type =='2':
+        # return render_template('deliveryhome.html',loggedIn=True,name=name)
+        return deliveryview()
 
-    except:
-        flash('Invalid Login')
-        if user_type == '0':
-            return render_template('login-customer.html')
-        elif user_type == '1':
-            return render_template('login-restaurant.html')
-        elif user_type == '2':
-            return render_template('login-delivery.html')
+    # except:
+    #     flash('Invalid Login')
+    #     if user_type == '0':
+    #         return render_template('login-customer.html')
+    #     elif user_type == '1':
+    #         return render_template('login-restaurant.html')
+    #     elif user_type == '2':
+    #         return render_template('login-delivery.html')
 
 @app.route('/',methods = ['POST'])
 def fillcomplaint():
@@ -92,18 +92,21 @@ def fillcomplaint():
 @app.route('/register',methods=['POST','GET'])
 def register():
     user_type = session['user_type']
-    name = request.form['name']
+    name = (request.form['name'])
     building_name = request.form['Bname']
     city = request.form['city']
     pin = request.form['pin']
     ph = request.form['phno']
-
-    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    # return render_template("tral.html",name = '"'+name+'"')
+    user_name=session['name']+session['password']
+    conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     if user_type == '0':
         email = request.form['email-id']
         c=cursor.execute(f'INSERT INTO CUSTOMER (c_name,phone_no,email_id) values(%s,{ph},%s)',(name,email))
-        c2=cursor.execute(f'SELECT customer_id from customer where c_name={name}')
+        conn.commit()
+        name = "'"+(name)+"'"
+        c2=cursor.execute(f'SELECT customer_id from customer where c_name = {name}')
         c_id=cursor.fetchone()[0]
         c1 = cursor.execute(f'INSERT INTO CUSTOMER_Address (customer_id,building_name,city,pin_code) values({c_id},%s,%s,{pin})',(building_name,city))
         flash(f'Ur password is {c_id}')
@@ -112,13 +115,37 @@ def register():
     elif user_type == '1':
         gstno = request.form['gst_no']
         image_url = request.form['img_link']
+        c=cursor.execute(f'INSERT INTO restaurants (r_name,r_phone_no,r_image_link,gst_no) values(%s,{ph},%s,{gst_no})',(name,image_url))
+        conn.commit()
+        name = "'"+(name)+"'"
+        c2=cursor.execute(f'SELECT r_id from restaurants where r_name={name}')
+        r_id=cursor.fetchone()[0]
+        c1 = cursor.execute(f'INSERT INTO restaurant_Address (r_id,building_name,city,pin_code) values({r_id},%s,%s,{pin})',(building_name,city))
+        flash(f'Ur password is {r_id}')
         return render_template('login-restaurant.html')
     elif user_type == '2':
-        email = request.form['email-id']
+        c=cursor.execute(f'INSERT INTO deliveryboy (name,ph_no) values(%s,%s)',(name,ph))
+        conn.commit()
+        name = "'"+(name)+"'"
+        c2=cursor.execute(f'SELECT id from deliveryboy where name={name}')
+        d_id=cursor.fetchone()[0]
+        city = "'"+city+"'"
+        c1 = cursor.execute(f'INSERT INTO delivery_Address (deliveryboy_id,city,pin_code) values({d_id},{city},{pin})')
+        flash(f'Ur password is {d_id}')
+        conn.commit()
         return render_template('login-delivery.html')
 
+@app.route('/deliveryview')
+def deliveryview():
+    id = session['password']
+    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c = cursor.execute(f'SELECT * from order_Address_view where deliveryboy_id= {id}')
+    c1 = cursor.fetchone()
+    return render_template('deliveryhome.html',results = c1)
 
-# @app.route('/')
+
+# 
 # def home():
 
   
@@ -196,11 +223,7 @@ def register():
  
 #     conn.close()
 
-# # top_5drestaurants()
-# # get_restaurants('Saffron Spice')
 
-# #top5 dishes of a restaurant and all dishes
-# restaurants()
 
 # #do route
 # @app.route()

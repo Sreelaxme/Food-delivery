@@ -19,15 +19,17 @@
     <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
       <a href="#home" class="w3-bar-item w3-button">Zinger</a>
       <img href="..\img\Logo.png" >
-      <!-- Right-sided navbar links. Hide them on small screens -->
-      <div class="w3-right w3-hide-small">
-        <a href="../templates/index.html#about" class="w3-bar-item w3-button">About</a>
-        <a href="../templates/index.html#menu" class="w3-bar-item w3-button">Menu</a>
-        <a href="../templates/index.html#contact" class="w3-bar-item w3-button">Contact</a>
-      </div>
     </div>
   </div>
-  
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <p class="flashes">
+          {% for message in messages %}
+              {{ message }}
+          {% endfor %}
+      </p>
+  {% endif %}
+{% endwith %}
   <div class="container" id="container">
       <div class="form-container sign-up-container">
           <form action="{{ url_for('login') }}" method = "post">
