@@ -33,11 +33,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
-  <  <!-- Menu Section -->
+   <!-- Menu Section -->
   <div class="w3-row" id="menu">
     <div class="w3-col l6 w3-padding-large">
       <h1 class="w3-center">Top 5 Restaurants</h1><br>
-      {% for result in resulcshdgshggshhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhts%}
+      {% for result in results%}
         <h4>{{result[1]}}</h4>
         {%if(loggedIn==True)%}
           <p><button class="w3-button w3-light-grey w3-section" type="submit">DONE</button></p>
@@ -56,7 +56,7 @@ function w3_open() {
 }
  
 function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("mySidebar").style.display = "none"
 }
 </script>
 
