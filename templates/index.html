@@ -96,10 +96,10 @@ h1, h2, h3, h4, h5, h6 {
     <h1>Contact</h1><br>
     <p>We take customer feedback quite seriously. So for feedback/ complaints fill the form below</p>
     <p>You can also contact us by phone xxxxxx or email zinger@zinger.com, or you can send us a message here:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="email-id" required name="email"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
+    <form method="post" action="{{ url_for('fillcomplaint') }}">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="email-id"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="message"></p>
       <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
     </form>
   </div>
