@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+.w3-sidebar {
+  z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#home" class="w3-bar-item w3-button">Zinger</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button">About</a>
+      <a href="#menu" class="w3-bar-item w3-button">Menu</a>
+      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+      <a href="#contact" class="w3-bar-item w3-button">Cart</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+ <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+    <i class="fa fa-remove"></i>
+  </a>
+  <h4 class="w3-bar-item"><b>Filters</b></h4>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button">Veg/Non-Veg</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a class="w3-bar-item w3-button" href="#" name="veg" value = 1>Veg</a>
+      <a class="w3-bar-item w3-button" href="#" name="nonveg" value = 0>Non-Veg</a>
+    </div>
+  </div>
+
+  <div class="w3-dropdown-hover">
+    <button class="w3-button">Cuisine</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a class="w3-bar-item w3-button" href="#" name="thai" value="0">Thai</a>
+      <a class="w3-bar-item w3-button" href="#" name="japanese" value="1">Japanese</a>
+      <a class="w3-bar-item w3-button" href="#" name="korean" value="2">Korean</a>
+      <a class="w3-bar-item w3-button" href="#" name="mexican" value="3">Mexican</a>
+      <a class="w3-bar-item w3-button" href="#" name="italian" value="4">Italian</a>
+      <a class="w3-bar-item w3-button" href="#" name="middle-eastern" value="5">Middle Eastern</a>
+      <a class="w3-bar-item w3-button" href="#" name="indian" value="6">Indian</a>
+      <a class="w3-bar-item w3-button" href="#" name="vietnamese" value="7">Vietnamese</a>
+      <a class="w3-bar-item w3-button" href="#" name="chinese" value="8">Chinese</a>
+    </div>
+  </div>
+
+  <div class="w3-dropdown-hover">
+    <button class="w3-button">Rating</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+     <a class="w3-bar-item w3-button" href="#" name="5-stars" value="5">5 stars</a>
+     <a class="w3-bar-item w3-button" href="#" name="4-stars-up" value="4">4 stars & up</a>
+     <a class="w3-bar-item w3-button" href="#" name="3-stars-up" value="3">3 stars & up</a>
+     <a class="w3-bar-item w3-button" href="#" name="2-stars-up" value="2">2 stars & up</a>
+     <a class="w3-bar-item w3-button" href="#" name="1-star-up" value="1">1 star & up</a>
+
+    </div>
+  </div>
+
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">RESTAURANT</h1>
+      <p>WE ARE GOOD! BUY OUR STUFF! </p>
+    </div>
+    <div class="w3-col l6 w3-padding-large">
+      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
+    </div>
+  </div>
+
+  <div class="w3-row">
+<!-- Menu Section -->
+<div class="w3-row w3-padding-64" id="menu">
+  <div class="w3-col l6 w3-padding-large">
+    <h1 class="w3-center">Our Menu</h1><br>
+    <div class="w3-row">
+      <div class="w3-col s3">
+        <img src="/w3images/tablesetting.jpg" alt="Bread Basket" style="width:100%; max-width:100px; height:auto;">
+      </div>
+      <div class="w3-col s9">
+        <h4>Bread Basket</h4>
+        <p class="w3-text-grey">Veg American 5.50</p><br>
+        <div class="w3-row">
+          <div class="w3-col s6">
+            <label for="quantity">Qty:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+            <input type="hidden" name="item_id" value="2">
+          </div>
+          <div class="w3-col s6">
+            <form action="/add_to_cart" method="POST">
+              <button class="w3-button w3-green w3-round-large">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-row">
+      <div class="w3-col s3">
+        <img src="/w3images/tablesetting.jpg" alt="Scrambled eggs" style="width:100%; max-width:100px; height:auto;">
+      </div>
+      <div class="w3-col s9">
+        <h4>Scrambled eggs</h4>
+        <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
+        <div class="w3-row">
+          <div class="w3-col s6">
+            <label for="quantity">Qty:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+            <input type="hidden" name="item_id" value="2">
+          </div>
+          <div class="w3-col s6">
+            <form action="/add_to_cart" method="POST">
+              <button class="w3-button w3-green w3-round-large">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <footer id="myFooter">
+    <div class="w3-container w3-theme-l2 w3-padding-32">
+      <h4>Footer</h4>
+    </div>
+
+
+  </footer>
+
+<!-- END MAIN -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
+
