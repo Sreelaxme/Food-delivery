@@ -6,7 +6,7 @@ import re
 from PIL import Image 
  
 app = Flask(__name__)
-
+app.secret_key = 'cairocoders-ednalan'
  
 DB_HOST = "localhost"
 DB_NAME = "admin"
@@ -31,7 +31,7 @@ def logout():
     session['loggedInCustomers'] = False
     return render_template('index.html',loggedIn=False)
 
-@app.route('/loggingIn')
+@app.route('/login_check', methods = ['POST'])
 def login_check():
     user_type = request.form['user_type']
     if user_type == '0':

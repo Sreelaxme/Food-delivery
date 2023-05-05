@@ -1,4 +1,9 @@
 #app.py
+<!-- <form method="post" action="{{ url_for('all_restaurant') }}">
+          <button class="w3-bar-item w3-button" type="submit">Order Now</a> -->
+      <!-- </form> -->
+<!-- <form action="{{ url_for('login') }}" method = "post"> -->
+<!-- </form> -->
 from flask import Flask, request, session, redirect, url_for, render_template, flash
 import psycopg2 #pip install psycopg2 
 import psycopg2.extras
