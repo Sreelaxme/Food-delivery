@@ -34,14 +34,48 @@ def logout():
 @app.route('/login_check', methods = ['POST'])
 def login_check():
     user_type = request.form['user_type']
+    session['user_type']=user_type
     if user_type == '0':
         return render_template('login-customer.html')
     elif user_type == '1':
         return render_template('login-restaurant.html')
     elif user_type == '2':
         return render_template('login-delivery.html')
+@app.route('/login')
+def login():
+    name = request.form['name']
+    session['name']=name
+
+    password = request.form['password']
+    session['password'] = password
+    user_type = session['user_type']
+    try:
+        conn=psycopg2.connect(dbname=DB_NAME, user=name+password, password=password, host=DB_HOST)
+        if user_type == '0':
+            session['loggedInCustomers'] = True
+            return render_template('index.html',loggedIn=True,name=name)
+        if user_type =='1':
+            return render_template('restindex.html',loggedIn=True,name=name)
+        if user_type =='2':
+            return render_template('deliveryindex.html',loggedIn=True,name=name)
+        
+
+    except:
+        flash('Invalid Login')
+        if user_type == '0':
+            return render_template('login-customer.html')
+        elif user_type == '1':
+            return render_template('login-restaurant.html')
+        elif user_type == '2':
+            return render_template('login-delivery.html')
+    
+    
+    
+
+
+
 # @app.route('/')
-# def home():INSERT INTO Deliveryboy(id, name, ph_no, rating, status)
+# def home():
 
   
 #     return render_template('index.html')
