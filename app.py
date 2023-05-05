@@ -143,8 +143,24 @@ def deliveryview():
     c = cursor.execute(f'SELECT * from order_Address_view where deliveryboy_id= {id}')
     c1 = cursor.fetchone()
     return render_template('deliveryhome.html',results = c1)
+@app.route('/dish')
+def restaurant_dish():
+    user_name=session['name']+session['password']
+    conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c = cursor.execute(f'SELECT dish_id,dish_name,dish_image_link from restaurant_dish')
+    dishes = cursor.fetchall()
+    return render_template('rest.html',results = dishes)
 
-
+@app.route('/items')
+def restaurant_items():
+    id = session['password']
+    user_name=session['name']+session['password']
+    conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c = cursor.execute(f'SELECT d.dish_name,i.item_cost,i.available from restaurant_dish as d join restaurant_items on dish_id where r_id = {id}')
+    items = cursor.fetchall()
+    return render_template('restmenu.html',results = items)
 # 
 # def home():
 
