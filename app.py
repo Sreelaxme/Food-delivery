@@ -21,9 +21,25 @@ def top_5_restaurants():
     c.execute(query)
     restaurants = c.fetchall()
     session['top_restaurants'] = restaurants
+    session['loggedInCustomers'] = False
+    session['veg'] =False
     # conn.close()
     return render_template('index.html', results=restaurants,loggedIn = False)
+@app.route('/')
+def logout():
+    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    session['loggedInCustomers'] = False
+    return render_template('index.html',loggedIn=False)
 
+@app.route('/loggingIn')
+def login_check():
+    user_type = request.form['user_type']
+    if user_type == '0':
+        return render_template('login-customer.html')
+    elif user_type == '1':
+        return render_template('login-restaurant.html')
+    elif user_type == '2':
+        return render_template('login-delivery.html')
 # @app.route('/')
 # def home():INSERT INTO Deliveryboy(id, name, ph_no, rating, status)
 
