@@ -75,7 +75,9 @@ h1, h2, h3, h4, h5, h6 {
       {% for result in results%}
         <h4>{{result[1]}}</h4>
         {%if(loggedIn==True)%}
+        <form method="post" action="{{ url_for('all_dishes', restaurant_id=result[1]) }}">
           <p><button class="w3-button w3-light-grey w3-section w3-button" type="submit">ORDER FROM HERE</button></p>
+      </form>      
         {% endif %}
         {% endfor %}
      
@@ -84,7 +86,9 @@ h1, h2, h3, h4, h5, h6 {
     <div class="w3-col l6">
       <img class="w3-image" src="../static/style/Food.png" alt="Hamburger Catering" width="1600" height="800">
     <div class="w3-display">
+      <form method="POST" action="{{ url_for('all_restaurants') }}">
       <p><button class="w3-button w3-light-grey w3-section" type="submit">VIEW MORE RESTAURANTS</button></p>
+    </form>
     </div>
     </div>
   </div>
