@@ -20,11 +20,13 @@ def top_5_restaurants():
     query = "SELECT * FROM Restaurants ORDER BY rating DESC LIMIT 5"
     c.execute(query)
     restaurants = c.fetchall()
+    session['top_restaurants'] = restaurants
     # conn.close()
-    return render_template('index.html', results=restaurants)
+    return render_template('index.html', results=restaurants,loggedIn = False)
 
 # @app.route('/')
-# def home():
+# def home():INSERT INTO Deliveryboy(id, name, ph_no, rating, status)
+
   
 #     return render_template('index.html')
 # @app.route('/', methods=['GET','POST'])
