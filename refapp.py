@@ -10,6 +10,34 @@ import psycopg2.extras
 import re 
 from werkzeug.security import generate_password_hash, check_password_hash
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ @app.route('/deliver', methods=['POST'])
+def deliver():
+    if request.form.get('delivered'):
+        # The "Delivered" button was clicked
+        # Perform the appropriate action here
+        return redirect(url_for('some_other_view_function'))
+    else:
+        # The form was submitted, but the "Delivered" button was not clicked
+        # Handle this case as appropriate
+        pass
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 app = Flask(__name__)
 app.secret_key = 'cairocoders-ednalan'
  
