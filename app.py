@@ -68,6 +68,8 @@ def login():
             return render_template('login-restaurant.html')
         elif user_type == '2':
             return render_template('login-delivery.html')
+@app.route('/')
+def fillcomplaint():
     
     
     
