@@ -57,7 +57,7 @@ def login():
         session['loggedInCustomers'] = True
         return render_template('index.html',results = session['top_restaurants'] ,loggedIn=True,name=name)
     if user_type =='1':
-        return render_template('restindex.html',loggedIn=True,name=name)
+        return render_template('rest.html',loggedIn=True,name=name)
     if user_type =='2':
         # return render_template('deliveryhome.html',loggedIn=True,name=name)
         return deliveryview()
@@ -193,6 +193,10 @@ def all_dishes():
     c.execute(query)
     dishes = c.fetchall()
     return render_template('restaurant_ordering.html',results = dishes)
+
+#update time
+#display
+
 # def home():
 
   

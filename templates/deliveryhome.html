@@ -17,16 +17,17 @@
   <h4>Zinger</h4>
   </div>
 </header>
+{%if results%}
 
-
+{%for result in results%}
 <div class="w3-row-padding w3-center w3-margin-top">
 <div class="w3-third">
   <div class="w3-card w3-container" style="min-height:460px">
   <h3>From Address</h3><br>
   <i class="w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-  <p>{{results[0][0]}}</p>
-  <p>{{results[0][1]}}</p>
-  <p>{{results[0][2]}}</p>
+  <p>{{result[0]}}</p>
+  <p>{{result[1]}}</p>
+  <p>{{result[2]}}</p>
   </div>
 </div>
 
@@ -34,9 +35,9 @@
   <div class="w3-card w3-container" style="min-height:460px">
   <h3>To Address</h3><br>
   <i class="w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
-  <p>{{results[0][3]}}</p>
-  <p>{{results[0][4]}}</p>
-  <p>{{results[0][5]}}</p>
+  <p>{{result[3]}}</p>
+  <p>{{result[4]}}</p>
+  <p>{{result[5]}}</p>
   </div>
 </div>
 
@@ -51,12 +52,7 @@
 </div>
 </div>
 
+{%endfor%}
+{% endif %}
 </body>
 </html>
- from_Building_name,
- from_city,
-  from_pin_code,
-to_Building_name,
-to_city,
-to_pin_code,
- deliveryboy_id
