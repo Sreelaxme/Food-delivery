@@ -44,7 +44,7 @@
 
 <div class="w3-third">
   <div class="w3-card w3-container" style="min-height:460px">
-    <form method="post" action="{{ url_for('deliver') }}">
+    <form method="post" action="{{ url_for('deliveryview') }}">
         <!-- Other form fields here -->
         <input type="hidden" name="delivered" value="true">
         <button class="w3-button w3-center" style="min-height:400px" type="submit">Delivered</button>
@@ -55,3 +55,10 @@
 
 </body>
 </html>
+ from_Building_name,
+ from_city,
+  from_pin_code,
+to_Building_name,
+to_city,
+to_pin_code,
+ deliveryboy_id

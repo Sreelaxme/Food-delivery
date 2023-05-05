@@ -59,8 +59,8 @@ def login():
     if user_type =='1':
         return render_template('restindex.html',loggedIn=True,name=name)
     if user_type =='2':
-        return render_template('deliveryindex.html',loggedIn=True,name=name)
-        
+        # return render_template('deliveryhome.html',loggedIn=True,name=name)
+        return deliveryview()
 
     # except:
     #     flash('Invalid Login')
@@ -98,7 +98,8 @@ def register():
     pin = request.form['pin']
     ph = request.form['phno']
     # return render_template("tral.html",name = '"'+name+'"')
-    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    user_name=session['name']+session['password']
+    conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     if user_type == '0':
         email = request.form['email-id']
@@ -134,8 +135,17 @@ def register():
         conn.commit()
         return render_template('login-delivery.html')
 
+@app.route('/deliveryview')
+def deliveryview():
+    id = session['password']
+    conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c = cursor.execute(f'SELECT * from order_Address_view where deliveryboy_id= {id}')
+    c1 = cursor.fetchone()
+    return render_template('deliveryhome.html',results = c1)
 
-# @app.route('/')
+
+# 
 # def home():
 
   
@@ -213,11 +223,7 @@ def register():
  
 #     conn.close()
 
-# # top_5drestaurants()
-# # get_restaurants('Saffron Spice')
 
-# #top5 dishes of a restaurant and all dishes
-# restaurants()
 
 # #do route
 # @app.route()
