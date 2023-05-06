@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Shopping Cart UI</title>
-	<link rel="stylesheet" type="text/css" href="../static/style/style3.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
+<title>Zinger-Food Delivery</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/style/style1.css">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
 </head>
 <body>
-   <div class="CartContainer">
-   	   <div class="Header">
-   	   	<h3 class="Heading">Shopping Cart</h3>
-   	   </div>
 
-   	   <div class="Cart-Items">
-		{%for result in results%}
-   	   	  <div class="about">
-            <h1 class="title">{{result[1]}}</h1>
-            <h3 class="subtitle">{{result[0]}}</h3>
-        </div>
-        <div class="about">
-            <h1 class="title">2</h1>
-        </div>
-   	   	  <div class="prices">
-   	   	  	<div class="amount">{result[2]}</div>
-   	   	  </div>
-   	   </div>
-	   {%endfor%}
-   	 <hr> 
-   	 <div class="checkout">
-   	 <div class="total">
-   	 	<div>
-   	 		<div class="Subtotal">Sub-Total</div>
-   	 	</div>
-   	 	<div class="total-amount">{{total}}</div>
-   	 </div>
-   	 <button class="button" >Checkout</button></div>
-   </div>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#home" class="w3-bar-item w3-button">Zinger</a>
+    <img href="../img/img/Logo.png" >
+    <!-- Right-sided navbar links. Hide them on small screens -->
+  </div>
+</div>
+
+
+  <!-- Menu Section -->
+  <div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col w3-padding-large">
+      <h1 class="w3-center">Your Cart</h1><br>
+      {% for result in results%}
+        <h2>{{result[1]}} {{result[0]}} Rs.{{result[2]}}</h2>
+             
+  
+        {% endfor %}
+     
+    <div class="w3-col l6">
+	  <div class="w3-display">
+		<form method="POST" action="{{ url_for('order') }}">
+		<p><button class="w3-button w3-light-grey w3-section" type="submit">ORDER NOW</button></p>
+	  </form>
+	  </div>
+	  </div>
+	</div>
+    </div>
+    
+
+  <hr>
+
+
+
 </body>
 </html>
-customer_id,dish_name,total_amount
+
+
