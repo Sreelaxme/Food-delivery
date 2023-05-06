@@ -28,7 +28,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <a href="#home" class="w3-bar-item w3-button">Zinger</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="{{ url_for('show_cart') }}" class="w3-bar-item w3-button">Cart</a>
     </div>
   </div>
 </div>
@@ -81,8 +80,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
       <h1 class="w3-text-teal">RESTAURANT</h1>
       <p>WE ARE GOOD! BUY OUR STUFF! </p>
     </div>
-    <div class="w3-col l6 w3-padding-large">
-      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
+    <div class="w3-col l6 w3-padding-large"><img class="w3-image" src="../static/style/food.jpg" alt="Hamburger Catering" >
+
     </div>
   </div>
 
@@ -95,9 +94,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
       
       {%for result in results%}
       <div class="w3-col s3">
-        <img src={{results[2]}} alt={{result[0]}} style="width:100%; max-width:100px; height:auto;">
+        <img  max-width:100px; height:auto>
       </div>
-
 
       <div class="w3-col s9">
         <h4>{{result[0]}}</h4>

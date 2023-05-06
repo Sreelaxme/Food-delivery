@@ -194,8 +194,8 @@ def all_dishes():
     dishes = c.fetchall()
     return render_template('restaurant_ordering.html',results = dishes)
 
-@app.route('/cart',methods = ['POST'])
-def cart():
+@app.route('/ordering',methods = ['POST'])
+def ordering_cart():
     user_name=session['name']+session['password']
     restaurant_id = request.form['restaurant_id']
     dish_id = request.form['dish_id']
@@ -205,6 +205,29 @@ def cart():
     query = f"select item_id from restaurant_items where dish_id = {dish_id } and r_id = {restaurant_id}"
     c.execute(query)
     item_id = c.fetchone()[0]
+    number = request.form['number']
+    query1 = f"INSERT INTO customer_cartlist (item_id,customer_id,number) values({item_id},{session['password']},{number})"
+    c.execute(query1)
+    # cart_list = c.fetchall()
+
+    return render_template('restaurant_ordering.html')
+
+@app.route()
+def cart():
+    user_name=session['name']+session['password']
+    c_id = session['password']
+    restaurant_id = request.form['restaurant_id']
+    conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
+    c = conn.cursor()
+    # query1 = f"SELECT item_id from customer_cartlist where customer_id = {c_id}"
+    # c.execute(query1)
+    item_id
+    query=f"SELECT c.customer_id,d.dish_name,c.total_amount from cutomer_cart as c join customer_cartlist as cl  on cl.customer_id=c.customer_id"
+    query+=f"join restaurant_dish as d on cl.item_id = d.item_id where cl.customer_id = {c_id} "
+    c.execute(query)
+    cart = c.fetchall()
+    return render_template('cart.html',results=cart)
+
 
 #update time
 #display
