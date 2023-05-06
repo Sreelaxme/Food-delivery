@@ -181,7 +181,7 @@ def all_dishes():
     restaurant_id = request.form['restaurant_id']
     conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
     c = conn.cursor()
-    query = f"SELECT d.dish_name,d.cousine,d.dish_image_link,d.vegetarian FROM Restaurant_dish as d join restaurant_items as i on d.dish_id=i.dish_id where i.r_id = {restaurant_id}"
+    query = f"SELECT d.dish_name,d.cousine,d.dish_image_link,d.vegetarian,d.dish_id FROM Restaurant_dish as d join restaurant_items as i on d.dish_id=i.dish_id where i.r_id = {restaurant_id}"
     if request.form.get('cuisine'):
         query +=f"and d.cousine = {cuisine}"
     else:
@@ -193,6 +193,18 @@ def all_dishes():
     c.execute(query)
     dishes = c.fetchall()
     return render_template('restaurant_ordering.html',results = dishes)
+
+@app.route('/cart',methods = ['POST'])
+def cart():
+    user_name=session['name']+session['password']
+    restaurant_id = request.form['restaurant_id']
+    dish_id = request.form['dish_id']
+    conn = psycopg2.connect(dbname=DB_NAME, user=user_name, password=session['password'], host=DB_HOST)
+    c = conn.cursor()
+
+    query = f"select item_id from restaurant_items where dish_id = {dish_id } and r_id = {restaurant_id}"
+    c.execute(query)
+    item_id = c.fetchone()[0]
 
 #update time
 #display
