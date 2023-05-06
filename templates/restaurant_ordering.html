@@ -28,10 +28,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <a href="#home" class="w3-bar-item w3-button">Zinger</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">About</a>
-      <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-      <a href="#contact" class="w3-bar-item w3-button">Cart</a>
+      <a href="{{ url_for('show_cart') }}" class="w3-bar-item w3-button">Cart</a>
     </div>
   </div>
 </div>
@@ -43,40 +40,33 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Filters</b></h4>
-  <div class="w3-dropdown-hover">
-    <button class="w3-button">Veg/Non-Veg</button>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a class="w3-bar-item w3-button" href="#" name="veg" value = 1>Veg</a>
-      <a class="w3-bar-item w3-button" href="#" name="nonveg" value = 0>Non-Veg</a>
+    <div class="w3-dropdown-hover">
+      <label class="w3-button" for="veg_nonveg">Veg/Non</label>
+      <select id="cuisine" class="w3-dropdown-content w3-bar-block w3-border" name="cuisine">
+        <option class="w3-bar-item w3-button" value="all">All</option>
+        <option class="w3-bar-item w3-button" value="t">Veg</option>
+      </select>
     </div>
-  </div>
 
-  <div class="w3-dropdown-hover">
-    <button class="w3-button">Cuisine</button>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a class="w3-bar-item w3-button" href="#" name="thai" value="0">Thai</a>
-      <a class="w3-bar-item w3-button" href="#" name="japanese" value="1">Japanese</a>
-      <a class="w3-bar-item w3-button" href="#" name="korean" value="2">Korean</a>
-      <a class="w3-bar-item w3-button" href="#" name="mexican" value="3">Mexican</a>
-      <a class="w3-bar-item w3-button" href="#" name="italian" value="4">Italian</a>
-      <a class="w3-bar-item w3-button" href="#" name="middle-eastern" value="5">Middle Eastern</a>
-      <a class="w3-bar-item w3-button" href="#" name="indian" value="6">Indian</a>
-      <a class="w3-bar-item w3-button" href="#" name="vietnamese" value="7">Vietnamese</a>
-      <a class="w3-bar-item w3-button" href="#" name="chinese" value="8">Chinese</a>
-    </div>
+    <div class="w3-dropdown-hover">
+    <label class="w3-button" for="cuisine">Cuisine</label>
+    <select id="cuisine" class="w3-dropdown-content w3-bar-block w3-border" name="cuisine">
+      <option class="w3-bar-item w3-button" value="all">All</option>
+      <option class="w3-bar-item w3-button" value="thai">Thai</option>
+      <option class="w3-bar-item w3-button" value="japanese">Japanese</option>
+      <option class="w3-bar-item w3-button" value="korean">Korean</option>
+      <option class="w3-bar-item w3-button" value="mexican">Mexican</option>
+      <option class="w3-bar-item w3-button" value="italian">Italian</option>
+      <option class="w3-bar-item w3-button" value="middle_eastern">Middle Eastern</option>
+      <option class="w3-bar-item w3-button" value="indian">Indian</option>
+      <option class="w3-bar-item w3-button" value="vietnamese">Vietnamese</option>
+      <option class="w3-bar-item w3-button" value="chinese">Chinese</option>
+    </select>
   </div>
-
-  <div class="w3-dropdown-hover">
-    <button class="w3-button">Rating</button>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-     <a class="w3-bar-item w3-button" href="#" name="5-stars" value="5">5 stars</a>
-     <a class="w3-bar-item w3-button" href="#" name="4-stars-up" value="4">4 stars & up</a>
-     <a class="w3-bar-item w3-button" href="#" name="3-stars-up" value="3">3 stars & up</a>
-     <a class="w3-bar-item w3-button" href="#" name="2-stars-up" value="2">2 stars & up</a>
-     <a class="w3-bar-item w3-button" href="#" name="1-star-up" value="1">1 star & up</a>
-
-    </div>
-  </div>
+  
+    <input type="submit" class = "w3-button" value="Filter">
+  </form>
+  
 
 </nav>
 
@@ -102,60 +92,33 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   <div class="w3-col l6 w3-padding-large">
     <h1 class="w3-center">Our Menu</h1><br>
     <div class="w3-row">
+      
+      {%for result in results%}
       <div class="w3-col s3">
-        <img src="/w3images/tablesetting.jpg" alt="Bread Basket" style="width:100%; max-width:100px; height:auto;">
+        <img src={{results[2]}} alt={{result[0]}} style="width:100%; max-width:100px; height:auto;">
       </div>
+
+
       <div class="w3-col s9">
-        <h4>Bread Basket</h4>
-        <p class="w3-text-grey">Veg American 5.50</p><br>
+        <h4>{{result[0]}}</h4>
+        <p class="w3-text-grey">{{result[1]}}</p><br>
         <div class="w3-row">
-          <div class="w3-col s6">
-            <label for="quantity">Qty:</label>
-            <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
-            <input type="hidden" name="item_id" value="2">
-          </div>
-          <div class="w3-col s6">
-            <form action="/add_to_cart" method="POST">
-              <button class="w3-button w3-green w3-round-large">Add to Cart</button>
-            </form>
-          </div>
+          <form action="/add_to_cart" method="POST">
+            <div class="w3-col s6">
+              <label for="quantity">Qty:</label>
+              <input type="number" id="quantity" name="quantity" min="1" value="1">
+              <input type = "hidden" type = "text" name = "dish_id" value={{result[4]}}>
+            </div>
+            <div class="w3-col s6">
+              <button type="submit" class="w3-button w3-green w3-round-large">Add to Cart</button>
+            </div>
+          </form>
+        </div>        
         </div>
       </div>
     </div>
+    {%endfor%}
 
-    <div class="w3-row">
-      <div class="w3-col s3">
-        <img src="/w3images/tablesetting.jpg" alt="Scrambled eggs" style="width:100%; max-width:100px; height:auto;">
-      </div>
-      <div class="w3-col s9">
-        <h4>Scrambled eggs</h4>
-        <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-        <div class="w3-row">
-          <div class="w3-col s6">
-            <label for="quantity">Qty:</label>
-            <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
-            <input type="hidden" name="item_id" value="2">
-          </div>
-          <div class="w3-col s6">
-            <form action="/add_to_cart" method="POST">
-              <button class="w3-button w3-green w3-round-large">Add to Cart</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-  <footer id="myFooter">
-    <div class="w3-container w3-theme-l2 w3-padding-32">
-      <h4>Footer</h4>
-    </div>
-
-
-  </footer>
 
 <!-- END MAIN -->
 </div>
@@ -187,4 +150,3 @@ function w3_close() {
 
 </body>
 </html>
-d.dish_name,d.cousine,d.dish_image_link,d.vegetarian
