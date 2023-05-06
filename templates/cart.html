@@ -12,32 +12,28 @@
    	   </div>
 
    	   <div class="Cart-Items">
-   	   	  <div class="image-box">
-   	   	  	<img src="images/apple.png" style={{ height="120px" }} />
-   	   	  </div>
+		{%for result in results%}
    	   	  <div class="about">
-            <h1 class="title">Apple Juice</h1>
-            <h3 class="subtitle">250ml</h3>
+            <h1 class="title">{{result[1]}}</h1>
+            <h3 class="subtitle">{{result[0]}}</h3>
         </div>
         <div class="about">
             <h1 class="title">2</h1>
         </div>
    	   	  <div class="prices">
-   	   	  	<div class="amount">Rs. 2.99</div>
-   	   	  	<div class="save"><u>Remove</u></div>
+   	   	  	<div class="amount">{result[2]}</div>
    	   	  </div>
    	   </div>
-
+	   {%endfor%}
    	 <hr> 
    	 <div class="checkout">
    	 <div class="total">
    	 	<div>
    	 		<div class="Subtotal">Sub-Total</div>
-   	 		<div class="items">2 items</div>
    	 	</div>
-   	 	<div class="total-amount">Rs. 6.18</div>
+   	 	<div class="total-amount">{{total}}</div>
    	 </div>
-   	 <button class="button">Checkout</button></div>
+   	 <button class="button" >Checkout</button></div>
    </div>
 </body>
 </html>
